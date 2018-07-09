@@ -16,4 +16,15 @@ if [ -f $file ]; then
     args="$args file.js"
 fi
 
+middleware=/data/middleware/*.js
+middlewares=()
+for mf in $middleware; do
+	if [ -f $mf ]; then
+		middlewares+=( $mf )
+	fi
+done
+if [ ${#middlewares[*]} -gt 0 ]; then
+	args=$args" --middlewares $(IFS=' '; echo "${middlewares[*]}")"
+fi
+
 json-server $args
