@@ -2,7 +2,7 @@
 
 args="$@"
 
-args="$@ -p 80"
+args="$@ -H 0.0.0.0 -p 80"
 
 file=/data/db.json
 if [ -f $file ]; then
@@ -20,11 +20,8 @@ middleware=/data/middleware/*.js
 middlewares=()
 for mf in $middleware; do
 	if [ -f $mf ]; then
-		middlewares+=( $mf )
+        args="$args -m $mf"
 	fi
 done
-if [ ${#middlewares[*]} -gt 0 ]; then
-	args="$args --middlewares $(IFS=' '; echo "${middlewares[*]}")"
-fi
 
 json-server $args
