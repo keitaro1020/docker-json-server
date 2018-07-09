@@ -24,7 +24,7 @@ for mf in $middleware; do
 	fi
 done
 if [ ${#middlewares[*]} -gt 0 ]; then
-	args=$args" --middlewares $(IFS=' '; echo "${middlewares[*]}")"
+	args="$args --middlewares $(IFS=' '; echo "${middlewares[*]}")"
 fi
 
 json-server $args
